@@ -1,0 +1,33 @@
+# Sensitive / source data
+*.xlsx
+*.xls
+*.csv
+*.tsv
+*.parquet
+*.pbix
+*.pbit
+*.zip
+
+# Credentials / local config
+.env
+.env.*
+*.secret
+*.secrets
+secrets/
+credentials/
+connection-strings/
+
+# Personal / HR exports
+data/raw/
+data/private/
+exports/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Keep text-based Power BI Project files under version control
+!*.pbip
+!*.tmdl
