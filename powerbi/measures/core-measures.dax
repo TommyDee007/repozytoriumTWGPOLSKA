@@ -1,0 +1,56 @@
+// TWG Power BI - core measure draft
+// Table/column names are placeholders until source schema is mapped.
+
+Revenue :=
+SUM ( FactFinancials[RevenueAmount] )
+
+Direct Cost :=
+SUM ( FactFinancials[DirectCostAmount] )
+
+Gross Margin :=
+[Revenue] - [Direct Cost]
+
+Gross Margin % :=
+DIVIDE ( [Gross Margin], [Revenue] )
+
+Branch Controllable Cost :=
+SUM ( FactFinancials[BranchControllableCostAmount] )
+
+Branch Contribution :=
+[Gross Margin] - [Branch Controllable Cost]
+
+Branch Contribution % :=
+DIVIDE ( [Branch Contribution], [Revenue] )
+
+Allocated Central Cost :=
+SUM ( FactFinancials[AllocatedCentralCostAmount] )
+
+Fully Loaded Result :=
+[Branch Contribution] - [Allocated Central Cost]
+
+Fully Loaded Result % :=
+DIVIDE ( [Fully Loaded Result], [Revenue] )
+
+Actual FTE :=
+SUM ( FactFTE[ActualFTE] )
+
+Forecast X :=
+SUM ( FactForecast[ForecastX] )
+
+Forecast Y :=
+SUM ( FactForecast[ForecastY] )
+
+Forecast Attainment % :=
+DIVIDE ( [Actual FTE], [Forecast X] )
+
+Revenue / FTE :=
+DIVIDE ( [Revenue], [Actual FTE] )
+
+Gross Margin / FTE :=
+DIVIDE ( [Gross Margin], [Actual FTE] )
+
+Unmapped Amount :=
+CALCULATE (
+    SUM ( FactFinancials[Amount] ),
+    FactFinancials[MappingStatus] = "UNMAPPED"
+)
